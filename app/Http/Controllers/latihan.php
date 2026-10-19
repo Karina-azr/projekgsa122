@@ -1,0 +1,43 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+class latihan extends Controller
+{
+    public function kalkulator()
+    {
+        return view('latihan');
+    }
+
+    public function hitung(Request $request)
+    {
+        $angka1 = $request->angka1;
+        $angka2 = $request->angka2;
+        $operator = $request->operator;
+
+        if ($operator == '+') {
+            $hasil = $angka1 + $angka2;
+        } elseif ($operator == '-') {
+            $hasil = $angka1 - $angka2;
+        } elseif ($operator == '*') {
+            $hasil = $angka1 * $angka2;
+        } elseif ($operator == '/') {
+            if ($angka2 == 0) {
+                $hasil = "Tidak bisa dibagi 0";
+            } else {
+                $hasil = $angka1 / $angka2;
+            }
+        } else {
+            $hasil = "Operator tidak valid";
+        }
+
+        return view('latihan', compact(
+            'angka1',
+            'angka2',
+            'operator',
+            'hasil'
+        ));
+    }
+}
